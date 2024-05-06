@@ -1,0 +1,3 @@
+$('input[id^=Q139]').keydown(function(e){ 
+    this.value = this.value.replace(/^0+/, '');
+});

@@ -1,0 +1,23 @@
+<script>
+
+var qid1 = "Q25";
+var qid2 = "Q26_1";
+$(document).ready(function(){
+
+$('input[type=radio][name^="'+qid1+'"]').change(function(){
+
+var arrayValues = [] ;
+
+$('input[type=radio][name^="'+qid1+'"]:checked').each(function(){
+arrayValues.push( $('label[for="'+$(this).attr('id')+'"]').text() );
+
+}); // end each
+
+if ( arrayValues.length > 0 ) { $("#"+qid2).val( arrayValues ); } else { $("#"+qid2).val( '' ); }
+
+}); // end change
+
+
+}); // end ready
+
+</script>

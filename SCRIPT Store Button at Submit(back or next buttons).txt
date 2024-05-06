@@ -1,0 +1,9 @@
+<script> 
+
+$(document).ready(function(){ 
+
+$('input[type="submit"]').click(function () { localStorage.button = $(this).attr('id');}); 
+
+}); 
+
+</script>

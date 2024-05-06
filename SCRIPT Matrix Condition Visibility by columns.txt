@@ -1,0 +1,15 @@
+<script> 
+
+function condVisib() { 
+
+qid = '#Q139';
+
+if ( '%[8]Q126_1%' == 0 ) { $(qid+'_A_D1').hide(); for(i=1;i<=16;i++){ $(qid+'C_A_'+i+'_1').hide(); } }   
+if ( '%[8]Q126_2%' == 0 ) { $(qid+'_B_D1').hide(); for(i=1;i<=16;i++){ $(qid+'C_B_'+i+'_1').hide(); } }   
+if ( '%[8]Q126_3%' == 0 ) { $(qid+'_C_D1').hide(); for(i=1;i<=16;i++){ $(qid+'C_C_'+i+'_1').hide(); } }   
+if ( '%[8]Q126_4%' == 0 ) { $(qid+'_D_D1').hide(); for(i=1;i<=16;i++){ $(qid+'C_D_'+i+'_1').hide(); } }   
+if ( '%[8]Q126_5%' == 0 ) { $(qid+'_E_D1').hide(); for(i=1;i<=16;i++){ $(qid+'C_E_'+i+'_1').hide(); } }   
+
+} // end function 
+
+</script>

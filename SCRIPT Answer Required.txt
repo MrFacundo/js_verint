@@ -1,0 +1,54 @@
+<script> 
+
+var nb1 = 0;  // if question is answered (count of radio buttons checked)
+var chosen_button = 'o';   // save the button that the respondent clicked (Button next or Button back) 
+
+document.onsubmit=CustomPdcProcessPage;    
+
+function CustomPdcProcessPage(){    
+    $("#ERROR").hide();    
+    if( $("#ERROR").is(":visible") ) return false;     
+    if( customValidation() ) {  return true;  }    
+    return false;
+} // hide ERROR message and run and check customvalidation function
+
+$(document).ready(function(){ 
+
+$('input[type="submit"]').click(function () { 
+chosen_button = $(this).attr('id'); // store attribute of button clicked (BB or BN) - local var, only can be used in this question
+localStorage.button = $(this).attr('id'); // store attribute of button clicked (BB or BN) - could be used in other questions
+count(); // runs count function to see if question is answered
+}); // end click function
+
+}); // end ready function 
+
+</script>
+
+<script>
+// function that will set the parameters we need  
+function customValidation()    
+{    
+    var result = true;  
+console.log(nb1);  
+    if (chosen_button =='BN')  // check if the button clicked was next (BN)
+    {    
+        if ( nb1 == 0 ) // if var nb1 == 0 then show error, else will continue to next page
+        {    
+            // show validation message    
+            $('#ERROR').show();    
+            $(document.body).animate({ 'scrollTop': $('#ERROR').offset().top}, 0);    
+            result = false;    
+        }    
+    }    
+    return result;    
+} // end function customValidation
+
+</script>
+
+<script>
+
+function count() {   
+nb1 = $('input[type=radio]:checked').length; // stores the nb of radio buttons checked
+}; // ends function count()
+
+</script>

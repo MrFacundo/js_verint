@@ -1,0 +1,8 @@
+will put a field with readonly attribute:
+
+$('#inputId').attr('readonly', true);
+
+Other type of field:
+
+$('#inputId').css( 'pointer-events', 'none' );
+

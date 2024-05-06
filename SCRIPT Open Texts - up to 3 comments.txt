@@ -1,0 +1,27 @@
+<script>
+
+$(document).ready(function(){
+
+qid = '#Q1028';
+
+q2Function();
+
+$(q2Quest).keyup(function(){
+q2Function();
+
+}); // end change
+
+});
+
+</script>
+
+<script>
+
+function q2Function(){
+
+if( $(qid+"_1").val() != "") { $(qid+"_2").show(); } else { $(qid+"_2").hide(); $(qid+"_2").val('');  }
+if( $(qid+"_2").val() != "") { $(qid+"_3").show(); } else { $(qid+"_3").hide(); $(qid+"_3").val(''); }
+
+};
+
+</script>
