@@ -1,3 +1,4 @@
+/*Shuffles elements within ranges within a list */
 $(function() {
     const $originalList = $('.response-set');
 

@@ -1,3 +1,5 @@
+/* Shuffles ol or ul li elements and saves the order in local storage
+    to be used in another call */
 $(function () {
     function shuffleList(selector) {
         var ul = $(selector);
@@ -30,7 +32,7 @@ $(function () {
 });
 
 
-// with last elements fixed:
+// with last 2 2elements fixed:
 $(function () {
     function shuffleList(selector) {
         var ul = $(selector);
