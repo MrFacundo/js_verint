@@ -1,10 +1,10 @@
-/*Shuffles elements within ranges within a list */
-$(function() {
+$(function () {
     const $originalList = $('.response-set');
 
     function randomizeListBlocks($list, ranges) {
         const $clonedList = $list.clone();
         const listItems = $clonedList.children('li');
+        const listLength = listItems.length;
 
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
@@ -16,15 +16,29 @@ $(function() {
             return array;
         }
 
-        ranges.forEach(([start, end]) => {
+        const blocks = ranges.map(([start, end]) => {
             const rangeItems = [];
             for (let i = start; i <= end; i++) {
                 rangeItems.push(listItems.eq(i - 1).clone());
             }
-            const shuffledItems = shuffle(rangeItems);
-            for (let i = start; i <= end; i++) {
-                listItems.eq(i - 1).replaceWith(shuffledItems[i - start]);
-            }
+            return shuffle(rangeItems);
+        });
+
+        const shuffledBlocks = shuffle(blocks);
+
+        const newListItems = [];
+        shuffledBlocks.forEach(block => {
+            newListItems.push(...block);
+        });
+
+        const lastRangeEnd = ranges[ranges.length - 1][1];
+        for (let i = lastRangeEnd; i < listLength; i++) {
+            newListItems.push(listItems.eq(i).clone());
+        }
+
+        $clonedList.empty();
+        newListItems.forEach(item => {
+            $clonedList.append(item);
         });
 
         console.log("Original list elements:", $list.children().toArray());
@@ -32,7 +46,5 @@ $(function() {
         $list.replaceWith($clonedList);
     }
 
-    randomizeListBlocks($originalList, [[2, 5], [6, 21]]);
+    randomizeListBlocks($originalList, [[1, 4], [5, 9], [10, 14]]);
 });
-
-

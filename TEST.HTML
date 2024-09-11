@@ -1,38 +1,197 @@
-<style>
-	/* Tooltip container */
-	.tooltip {
-	  position: relative;
-	  display: inspanne-block;
-	  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-	}
-  
-	/* Tooltip text */
-	.tooltip .tooltiptext {
-	  visibispanty: hidden;
-	  width: 120px;
-	  background-color: black;
-	  color: #fff;
-	  text-aspangn: center;
-	  padding: 5px 0;
-	  border-radius: 6px;
-	 
-	  /* Position the tooltip text */
-	  position: absolute;
-	  z-index: 1;
-	}
-  
-	/* Show the tooltip text when you mouse over the tooltip container */
-	.tooltip:hover .tooltiptext {
-	  visibispanty: visible;
-	}
-  </style>
-  
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+	<!-- Google Tag Manager -->
+	<script>
+		function loadGTM() {
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || []; w[l].push({
+					'gtm.start':
+						new Date().getTime(), event: 'gtm.js'
+				}); var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+						'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-MGSFRFN');
+		}
 
-<span class="tooltip">I would consume it as an addition to other ready meals I purchase<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as a replacement to other cupboard ready meals<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as a replacement to chilled ready meals<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as a replacement to frozen ready meals<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as a replacement to take-out / despanvery meals I purchase<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as a replacement to food prepared at home<div class="tooltip-text">Dummy Text</div></span>
-<span class="tooltip">I would consume it as an addition to or replacement for food to go from high street coffee shop<div class="tooltip-text">Dummy Text</div></span>
+		function checkAndLoadGTM() {
+			var status = new URLSearchParams(window.location.search).get('status');
+
+			if (status === "Submitted") {
+				// Set a flag in session storage to indicate GTM should not load again
+				sessionStorage.setItem('gtmSubmitted', 'true');
+				console.log("GTM will not load. Page has been submitted before.");
+				return;
+			}
+
+			if (!sessionStorage.getItem('gtmSubmitted')) {
+				console.log("GTM is loading.");
+				loadGTM();
+			}
+		}
+	</script>
+	<!-- End Google Tag Manager -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>%TITLE%</title>
+</head>
+
+<body onload="checkAndLoadGTM()">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGSFRFN" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<script>
+		$(document).ready(function () {
+			// Find the logo element
+			var logoElement = document.querySelector('.logo');
+			// Find the target row element where you want to insert the new row
+			var targetRowElement = logoElement.nextElementSibling;
+			// Create a new row element
+			var newRowElement = document.createElement('div');
+			newRowElement.className = 'row';
+			// Insert the new row element after the target row element
+			targetRowElement.parentNode.insertBefore(newRowElement, targetRowElement.nextElementSibling);
+			// Select the first div with class "row" and add the "sticky" class
+			$("div.row:last").addClass("sticky");
+
+			$('.ribbon').remove();
+			$('.parent').remove();
+			$("input[type=text]").on("keydown", function (e) {
+				if (e.key === "Enter") {
+					e.preventDefault();
+					$("#BN").trigger("click");
+				}
+			});
+		});
+
+		$('input[type="submit"]').click(function () {
+			localStorage.button = $(this).attr('id');
+			// Get the id attribute of the clicked submit button
+			var buttonId = $(this).attr('id');
+			// Store the buttonId in localStorage
+			localStorage.setItem('surveyButtonId', buttonId);
+		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			var loadingDiv = document.getElementById("LOADING");
+			if (loadingDiv) {
+				loadingDiv.innerHTML = loadingDiv.innerHTML.replace(/&nbsp;/g, "");
+			}
+		});
+
+		function loop() {
+			var currentPageId = $("#CurrentPageId").val();
+			var url = window.location.href;
+
+			if (!isNaN(currentPageId)) {
+				// If CurrentPageId is a number, do nothing
+				console.log("CurrentPageId is a number, no action taken.");
+				return;
+			}
+
+			// Check if the URL already contains the "status=" parameter
+			if (url.includes('status=')) {
+				console.log("URL already contains status, no action taken.");
+				return;
+			}
+
+			// Remove trailing slashes from the URL
+			url = url.replace(/\/+$/, '');
+
+			// Function to extract parameters from URL
+			function getUrlParameter(name) {
+				name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+				var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+				var results = regex.exec(location.search);
+				return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+			}
+
+			if (currentPageId === "Submit") {
+				// If CurrentPageId is "Submit", set status to "Submitted"
+				var CS = localStorage.getItem('CS');
+				var emailQ1 = localStorage.getItem('emailQ1');
+				var mobileQ1 = localStorage.getItem('mobileQ1');
+
+				// Add CS to URL only if it contains "EP3"
+				if (CS && CS.includes("EP3")) {
+					url += `?status=Submitted&email=${emailQ1}&mobile=${mobileQ1}&CS=${CS}`;
+				} else {
+					url += `?status=Submitted&email=${emailQ1}&mobile=${mobileQ1}`;
+				}
+
+				// Execute after a delay of 2 seconds
+				setTimeout(function () {
+					// Extract status parameter from URL
+					var status = getUrlParameter('status');
+					console.log(status);
+					// Show/hide divs based on status
+					if (status === 'Submitted') {
+						document.getElementById('ENDMSG').style.display = 'block';
+						document.getElementById('LOADING').style.display = 'none';
+						console.log('done');
+					} else {
+						document.getElementById('ENDMSG').style.display = 'none';
+						document.getElementById('LOADING').style.display = 'block';
+						console.log('not done');
+					}
+				}, 2000); // 2000 milliseconds = 2 seconds
+			} else if (currentPageId.startsWith("END")) {
+				// If CurrentPageId starts with "END", set status to "Terminated"
+				url += "?status=Terminated";
+			} else {
+				// Handle other cases if needed
+				console.log("Unhandled case for CurrentPageId:", currentPageId);
+				return;
+			}
+
+			// Update the URL using history.pushState
+			history.pushState(null, null, url);
+		}
+
+		$(document).ready(function () {
+			loop();
+		});
+	</script>
+
+	<!-- JavaScript to add the favicon -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var link = document.createElement('link');
+			link.rel = 'icon';
+			link.href = 'https://www.google.com/favicon.ico';
+			document.head.appendChild(link);
+		});
+	</script>
+
+	<div class="page-accent-left accent1"></div>
+	<div class="container-fluid page-content page-bg-image page-bg-color">
+		%LOGO%
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1" style="margin-left:15px; margin-right:15px;">
+				%CONTENT%
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4" style="margin-left:15px; margin-right:15px;">
+				%PROGRESS_BAR%
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 text-center" style="margin-left:15px; margin-right:15px;">
+				%TAG_LINE%
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1" style="margin-left:15px; margin-right:15px;">
+				%BUTTONS%
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
