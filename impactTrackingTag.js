@@ -1,4 +1,6 @@
-// Identify function (global)
+// ADD TO THE BOTTOM OF THE HEAD TAG
+
+Identify function (global)
 
 function setCookie(name, value, days) {
     var expires = "";

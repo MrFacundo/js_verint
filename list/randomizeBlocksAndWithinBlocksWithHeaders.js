@@ -2,7 +2,7 @@
 $(function () {
     const $originalList = $('.response-set');
 
-    function randomizeListBlocks($list, fixedRange) {
+    function randomizeListBlocks($list, fixedRange, shuffleBlocks) {
         const $clonedList = $list.clone();
         const listItems = $clonedList.children('li');
 
@@ -38,16 +38,27 @@ $(function () {
 
         if (currentBlock.length > 0) blocks.push(currentBlock);
 
-        const shuffledBlocks = shuffle(blocks.map(block => {
+        const shuffledBlocks = blocks.map(block => {
             const header = block.shift();
             return [header, ...shuffle(block)];
-        }));
+        });
+
+        if (shuffleBlocks) {
+            shuffle(shuffledBlocks);
+        }
 
         const newListItems = shuffledBlocks.flat().concat(fixedOptions);
 
         $clonedList.empty().append(newListItems);
         $list.replaceWith($clonedList);
     }
-
-    randomizeListBlocks($originalList, [20, 20]);
+/**
+ * Randomizes blocks of list items and the items within each block, while keeping the headers in place. 
+ * Leaves a fixed range of items in place.
+ * 
+ * @param {jQuery} $list - The jQuery object representing the list to be randomized.
+ * @param {Array} fixedRange - An array with two elements representing the start and end indices of the fixed range.
+ * @param {boolean} shuffleBlocks - A boolean indicating whether to shuffle the blocks themselves.
+ */
+    randomizeListBlocks($originalList, [23, 23], true);
 });

@@ -1,0 +1,93 @@
+<!-- ADD TO THE BOTTOM OF THE HEAD TAG IN THE CUSTOM THEME-->
+
+<!-- Impact Tracking -->
+<script type="text/javascript">
+	// Universal Tracking Tag
+	(function (a, b, c, d, e, f, g) { e["ire_o"] = c; e[c] = e[c] || function () { (e[c].a = e[c].a || []).push(arguments); }; f = d.createElement(b); g = d.getElementsByTagName(b)[0]; f.async = 1; f.src = a; g.parentNode.insertBefore(f, g); })( "https://utt.impactcdn.com/A5439617-ed7b-40d2-a6b2-a059ea27fddd1.js", "script", "ire", document, window );
+
+	// Identify Tag
+	function setCookie(name, value, days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "") + expires + "; path=/";
+	}
+
+	function getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(";");
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) === " ") c = c.substring(1, c.length);
+			if (c.indexOf(nameEQ) === 0)
+				return c.substring(nameEQ.length, c.length);
+		}
+		return null;
+	}
+
+	$(function () {
+		function generateUUID() {
+			return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+				/[xy]/g,
+				function (c) {
+					var r = (Math.random() * 16) | 0,
+						v = c == "x" ? r : (r & 0x3) | 0x8;
+					return v.toString(16);
+				}
+			);
+		}
+		let customProfileId = getCookie("customProfileId");
+		if (customProfileId) {
+			console.log("customProfileId found in cookies");
+		} else {
+			customProfileId = generateUUID();
+			setCookie("customProfileId", customProfileId, 365);
+		}
+		ire("identify", {
+			customerId: "Customer Id",
+			customerEmail: "SHA1 Email Address",
+			customProfileId: customProfileId,
+		});
+	});
+</script>
+<!-- End Impact Tracking  -->
+
+<!-- ADD TO THE BOTTOM OF THE BODY TAG IN THE SURVEY COMPLETED PAGE-->
+
+<!-- Impact Tracking -->
+<script>
+	// Conversion Tag
+	function generateOrderId() {
+		return "ORD-" + Math.random().toString(36).slice(2, 11).toUpperCase();
+	}
+	function getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(";");
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) === " ") c = c.substring(1, c.length);
+			if (c.indexOf(nameEQ) === 0)
+				return c.substring(nameEQ.length, c.length);
+		}
+		return null;
+	}
+	let customProfileId = getCookie("customProfileId");
+	$(function () {
+		var orderId = generateOrderId();
+		ire(
+			"trackConversion",
+			49465,
+			{
+				orderId: orderId,
+				customProfileId: customProfileId,
+				customerId: "",
+				customerEmail: "",
+			},
+			{ verifySiteDefinitionMatch: true }
+		);
+	});
+</script>
+<!-- End Impact Tracking  -->
