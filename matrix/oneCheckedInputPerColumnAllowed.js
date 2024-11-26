@@ -1,6 +1,6 @@
 // Only one checkbox can be checked per column.
 $(function () {
-	$('#Q581_WRAPPER input[type="checkbox"]').on("change", function () {
+	$('fieldset input[type="checkbox"]').on("change", function () {
 		var $this = $(this);
 		var columnIndex = $this.closest("td").index();
 		if ($this.is(":checked")) {
