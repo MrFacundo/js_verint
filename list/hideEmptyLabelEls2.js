@@ -2,10 +2,20 @@
 $(function () {
     // Array of values to check
     const valuesToCheck = [
-        "%[Q8_c]Q158_ALBL_4%", "%[Q8_c]Q158_ALBL_8%", "%[Q8_c]Q158_ALBL_12%",
-        "%[Q8_c]Q158_ALBL_16%", "%[Q8_c]Q158_ALBL_20%", "%[Q8_c]Q158_ALBL_24%",
-        "%[Q8_c]Q158_ALBL_28%", "%[Q8_c]Q158_ALBL_32%", "%[Q8_c]Q158_ALBL_36%",
-        "%[Q8_c]Q158_ALBL_40%", "%[Q8_c]Q158_ALBL_44%", "%[Q8_c]Q158_ALBL_48%"
+        "%[3.1]Q448LBL_1%", 
+        "%[3.1]Q448LBL_2%", 
+        "%[3.1]Q448LBL_3%", 
+        "%[3.1]Q448LBL_4%", 
+        "%[3.1]Q448LBL_5%",
+        "%[3.1]Q448LBL_6%",
+        "%[3.1]Q448LBL_7%",
+        "%[3.1]Q448LBL_8%",
+        "%[3.1]Q448LBL_9%",
+        "%[3.1]Q448LBL_10%",
+        "%[3.1]Q448LBL_11%",
+        "%[3.1]Q448LBL_12%",
+        "%[3.1]Q448LBL_13%",
+        "%[3.1]Q448LBL_14%" 
     ];
 
     const $list = $('.response-set');
