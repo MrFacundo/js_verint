@@ -1,6 +1,6 @@
-// Set flag questions based on the input values of the matrix
+// Validation: At least one answer per column is required
 $(function () {
-    function checkInputs(event) {
+    function checkInputs(event, validationMessage) {
         let $firstFieldset = $('fieldset').first();
         let result = [];
 
@@ -30,41 +30,23 @@ $(function () {
             });
         }
 
-        // Get a flag value for each column
-        let result2 = Array(result.length).fill(0);
-        
-        result.forEach((col, index) => {
-            if (col[4] === 1 || col[7] === 1 || col[8] === 1 || col[9] === 1) {
-                result2[index] = 1;
-            }
-        });
-        // Add an extra element to result2
-        result2.push(result2.every(value => value === 1) ? 1 : 0);
-
-        // Get a flag value for column 10
-        let result3 = result.every(col => col[10] === 1) ? 1 : 0;
-
         console.log("Columns input values:");
         console.log(result);
-        console.log("Flag values per column:");
-        console.log(result2);
-        console.log("Column 10 flag value:");
-        console.log(result3);
 
-        // Fill the inputs in the second fieldset
-        let $secondFieldset = $('fieldset').eq(1);
-        $secondFieldset.find('input[type="text"]').each(function (index) {
-            if (index < result2.length) {
-                $(this).val(result2[index]);
-            }
-        });
-
-
-        let $thirdFieldset = $('fieldset').eq(2);
-        $thirdFieldset.find('input[type="text"]')[0].value = result3;
+        let allColumnsValid = result.every(col => col.some(value => value === 1));
+        
+        if (allColumnsValid) {
+            console.log("valid");
+        } else {
+            console.log("invalid");
+            event.preventDefault();
+            $('.validation-message').remove();
+            const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert" style="">${validationMessage}</div>`;
+            $('fieldset').append(alertHtml);
+        }
     }
 
     $('#BN').on('click', function (event) {
-        checkInputs(event);
+        checkInputs(event, "Debe responder a todas las afirmaciones antes de enviar la encuesta.");
     });
 });
