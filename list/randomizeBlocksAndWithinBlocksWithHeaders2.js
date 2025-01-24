@@ -75,5 +75,5 @@ $(function() {
         $list.replaceWith($clonedList);
     }
     
-    randomizeListGroups($('.response-set'), ["Other physical store", "Other online store"]);
+    randomizeListGroups($('.response-set').first(), ["Other physical store", "Other online store"]);
 });
