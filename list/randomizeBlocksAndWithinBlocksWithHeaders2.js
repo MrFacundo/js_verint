@@ -3,10 +3,10 @@ $(function() {
      * Randomizes the order of list groups within a given list, while keeping certain fixed labels in place.
      * 
      * @param {jQuery} $list - The jQuery object representing the list to be randomized.
-     * @param {Array} fixedLabels - An array of labels that should remain in their original positions.
+     * @param {Array} fixedIndices - An array of indices that should remain in their original positions.
      */
-    function randomizeListGroups($list, fixedLabels) {
-        const $clonedList = $list.clone();
+    function randomizeListGroups($list, fixedIndices) {
+        const $clonedList = $list.clone(true);
         const listItems = $clonedList.children('li');
         
         function shuffle(array) {
@@ -19,38 +19,31 @@ $(function() {
             return array;
         }
         
-        function shouldStayFixed($item) {
-            if ($item.hasClass('choice-group')) return true;
-            let shouldFix = false;
-            $item.find('label').each(function() {
-                if (fixedLabels.includes($(this).text())) {
-                    shouldFix = true;
-                    return false;
-                }
-            });
-            return shouldFix;
+        function shouldStayFixed(index, $item) {
+            if ($item.hasClass('choice-group')) return false;
+            return fixedIndices.includes(index + 1); // +1 to match 1-based index
         }
         
         const blocks = [];
         let currentBlock = [];
         
-        listItems.each(function() {
+        listItems.each(function(index) {
             const $item = $(this);
             
             if ($item.hasClass('choice-group')) {
                 if (currentBlock.length > 0) {
                     blocks.push(currentBlock);
                 }
-                currentBlock = [$item.clone()];
+                currentBlock = [$item.clone(true)];
             } else {
-                if (shouldStayFixed($item)) {
+                if (shouldStayFixed(index, $item)) {
                     if (currentBlock.length > 0) {
                         blocks.push(currentBlock);
                     }
-                    blocks.push([$item.clone()]);
+                    blocks.push([$item.clone(true)]);
                     currentBlock = [];
                 } else {
-                    currentBlock.push($item.clone());
+                    currentBlock.push($item.clone(true));
                 }
             }
         });
@@ -75,5 +68,5 @@ $(function() {
         $list.replaceWith($clonedList);
     }
     
-    randomizeListGroups($('.response-set').first(), ["Other physical store", "Other online store"]);
+    randomizeListGroups($('.response-set').first(), [9, 17, 18]);
 });
