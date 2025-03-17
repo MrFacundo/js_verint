@@ -30,9 +30,6 @@ $(function () {
             });
         }
 
-        console.log("Columns input values:");
-        console.log(result);
-
         let allColumnsValid = result.every(col => col.some(value => value === 1));
         
         if (allColumnsValid) {

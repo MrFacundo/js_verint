@@ -1,6 +1,6 @@
 // Allows to have exclusive options per column in a matrix question.
 $(function () {
-    var exclusiveRows = [16, 17, 18]; // Array of exclusive row indices
+    var exclusiveRows = [13]; // Array of exclusive row indices
     console.log("exclusiveRows: ", exclusiveRows);
     $('fieldset input[type="checkbox"]').on("change", function () {
         var $this = $(this);
@@ -9,7 +9,7 @@ $(function () {
         if ($firstFieldset.find('table').length > 0) {
             // Desktop layout
             var columnIndex = $this.closest("td").index();
-            var rowIndex = $this.closest("tr").index() + 1; // Adjust for 1-based index
+            var rowIndex = $this.closest("tr").index() + 1;
             console.log("columnIndex: ", columnIndex);
             console.log("rowIndex: ", rowIndex);
             if (exclusiveRows.includes(rowIndex)) {
