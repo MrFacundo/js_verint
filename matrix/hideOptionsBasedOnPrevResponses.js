@@ -1,7 +1,7 @@
-/**
+ /**
  * Hides matrix rows based on previous responses.
  */
-$(function () {
+ $(function () {
     const items = [
         "%[12]Q283_A_1LBL%",
         "%[12]Q283_A_2LBL%",
@@ -17,7 +17,7 @@ $(function () {
         "%[12]Q283_A_12LBL%",
         "%[12]Q283_A_13LBL%"
     ];
-
+    
     const indexes = items.reduce((result, item, index) => {
         if (item === "Never") {
             result.push(index);
@@ -31,23 +31,34 @@ $(function () {
 
     function hideTableRows(indexes, repeatHeaderEveryNRows) {
         let $tbody = $(selector + ' tbody');
-        let $rows = $tbody.children('tr').not('.choice-row');
+        let $optionRows = $tbody.children('tr').not('.choice-row');
+        let $choiceRows = $tbody.children('tr.choice-row');
     
-        $rows.each((index, row) => {
-            if (indexes.includes(index)) {
-                $(row).hide();
-            } else {
+        $optionRows.hide();
+        $choiceRows.hide();
+    
+        let visibleCount = 0;
+    
+        $optionRows.each((index, row) => {
+            if (!indexes.includes(index)) {
                 $(row).show();
+                visibleCount++;
+    
+                if (visibleCount === repeatHeaderEveryNRows) {
+                    let choiceRow = $choiceRows.eq(0);
+                    if (choiceRow.length) {
+                        choiceRow.show();
+                        $choiceRows = $choiceRows.not(choiceRow);
+                    }
+                    visibleCount = 0;
+                }
             }
         });
     
-        let $nonChoiceRows = $rows.not('.choice-row');
-        let visibleNonChoiceRows = $nonChoiceRows.filter(':visible').length;
-    
-        if (visibleNonChoiceRows < repeatHeaderEveryNRows) {
-            $rows.filter('.choice-row').hide();
-        } else {
-            $rows.filter('.choice-row').show();
+        let lastVisibleRow = $tbody.children('tr:visible').last();
+        console.log("lastVisibleRow", lastVisibleRow);
+        if (lastVisibleRow.hasClass('choice-row')) {
+            lastVisibleRow.hide();
         }
     }
 
@@ -74,3 +85,4 @@ $(function () {
 
     hideContent(indexes, 7);
 });
+
