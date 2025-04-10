@@ -1,10 +1,11 @@
-// Shuffle rows in the table
 $(function () {
-    function shuffleRows() {
+    function shuffleRows(headerInsertAfter) {
         var $tableBody = $('table tbody');
         var $rows = $tableBody.find('tr');
+        var $headerRows = $rows.filter('.choice-row');
+        var $nonHeaderRows = $rows.not('.choice-row');
 
-        var shuffledRows = $rows.toArray();
+        var shuffledRows = $nonHeaderRows.toArray();
         for (var i = shuffledRows.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = shuffledRows[i];
@@ -13,14 +14,30 @@ $(function () {
         }
 
         $tableBody.empty();
+        var visibleCount = 0;
+
         $(shuffledRows).each(function (index, row) {
             if ($(row).css('display') !== 'none') {
                 $(row).removeClass('even-row odd-row');
-                $(row).addClass($tableBody.children(':visible').length % 2 === 0 ? 'odd-row' : 'even-row');
+                $(row).addClass(visibleCount % 2 === 0 ? 'odd-row' : 'even-row');
+                $tableBody.append(row);
+                visibleCount++;
+                if (visibleCount === headerInsertAfter) {
+                    $headerRows.each(function () {
+                        $tableBody.append(this);
+                    });
+                }
+            } else {
+                $tableBody.append(row);
             }
-            $tableBody.append(row);
         });
+
+        if (visibleCount <= headerInsertAfter) {
+            $headerRows.each(function () {
+                $tableBody.append(this);
+            });
+        }
     }
 
-    shuffleRows();
+    shuffleRows(7);
 });
