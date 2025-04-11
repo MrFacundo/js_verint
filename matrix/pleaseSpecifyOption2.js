@@ -4,9 +4,11 @@
 
 $(function () {
     function toggleHiddenFieldVisibility(row, pleaseSpecifyId) {
-		let $allInputEls = $('tbody tr').find('td input[type="radio"], td input[type="checkbox"]');
-        let $rowInputEls = $('tbody tr').eq(row).find('td input[type="radio"], td input[type="checkbox"]');
-		let $allOlInputEls = $('ol').find('input[type="radio"], input[type="checkbox"]');
+        let $allInputEls = $('tbody tr').find('td input[type="radio"], td input[type="checkbox"]');
+        let $rowInputEls = $('tbody tr')
+            .eq(row)
+            .find('td:not(:last-child) input[type="radio"], td:not(:last-child) input[type="checkbox"]');
+        let $allOlInputEls = $('ol').find('input[type="radio"], input[type="checkbox"]');
         let $olInputEls = $('ol').eq(row).find('input[type="radio"], input[type="checkbox"]');
 
         $allInputEls.add($allOlInputEls).on('change', function () {

@@ -33,12 +33,12 @@ $(function () {
         }
     }
 
-    toggleHiddenFieldVisibilityByColumn(7, "pleaseSpecifyQ13");
+    toggleHiddenFieldVisibilityByColumn(7, "pleaseSpecifyQ");
 
     $('#BN').on('click', function (event) {
         validate(
             event,
-            "pleaseSpecifyQ13"
+            "pleaseSpecifyQ"
         );
     });
 });

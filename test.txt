@@ -1,13 +1,25 @@
-<span id="img1"></span>     Linea Pininfarina Kitchen Design - SELEX
-<span id="img2"></span>     Linea New Cottage di Villeroy & Boch - ESSELUNGA
-<span id="img3"></span>     Colleziona le card Panini Adrenalyn & la Linea The Kick Panini - ESSELUNGA
-<span id="img4"></span>     Collezione Peanuts - COOP
-<span id="img5"></span>     Collezione Edo Alessi - COOP
-<span id="img6"></span>     Collezione coltelli e piccoli elettrodomestici di Bugatti - COOP ALLEANZA 3.0
-<span id="img7"></span>     Collezione Freddy - CONAD
-<span id="img8"></span>     Collezione di Natale Disney - CONAD
-<span id="img9"></span>     Collezione Tavola THUN - CONAD
-<span id="img10"></span>     Collezionamento Kung Fu Panda 4 - EUROSPIN
-<span id="img11"></span>     Collezione Looney Tunes - CARREFOUR
-<span id="img12"></span>     Colleziona il set tavola ALV by Alviero Martini - PAM
-
+    '<img src="%[48]Q264_1%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_2%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_3%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_4%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_5%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_6%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_7%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_8%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_9%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_10%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_11%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_12%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_13%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_14%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_15%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_16%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_17%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_18%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_19%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_20%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_21%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_22%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_23%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_24%" style="width: auto; height: 70px;">',
+    '<img src="%[48]Q264_25%" style="width: auto; height: 70px;">', 

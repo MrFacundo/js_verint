@@ -1,10 +1,9 @@
-/*Shuffles elements within ranges within a list */
+/* Shuffles elements within ranges within a list */
 $(function () {
     const $originalList = $('.response-set');
 
     function randomizeListBlocks($list, ranges) {
-        const $clonedList = $list.clone();
-        const listItems = $clonedList.children('li');
+        const listItems = $list.children('li');
 
         function shuffle(array) {
             let currentIndex = array.length, randomIndex;
@@ -17,22 +16,17 @@ $(function () {
         }
 
         ranges.forEach(([start, end]) => {
-            const rangeItems = [];
-            for (let i = start; i <= end; i++) {
-                rangeItems.push(listItems.eq(i - 1).clone());
-            }
+            const rangeItems = listItems.slice(start - 1, end).toArray();
             const shuffledItems = shuffle(rangeItems);
-            for (let i = start; i <= end; i++) {
-                listItems.eq(i - 1).replaceWith(shuffledItems[i - start]);
-            }
+
+            shuffledItems.forEach((item, index) => {
+                $list[0].insertBefore(item, listItems[end - 1].nextSibling);
+            });
         });
 
         console.log("Original list elements:", $list.children().toArray());
-        console.log("New list elements after shuffling:", $clonedList.children().toArray());
-        $list.replaceWith($clonedList);
+        console.log("New list elements after shuffling:", $list.children().toArray());
     }
 
     randomizeListBlocks($originalList, [[1, 4], [5, 9], [10, 14]]);
 });
-
-
