@@ -1,37 +1,26 @@
-// Shuffle columns of a table (desktop layout), with columns at fixed position
+// Shuffle columns of a table (desktop layout), excluding the last column
 $(function () {
-    function shuffleColumns(rangeToLeaveInPlace) {
-        const rows = $('table').find('tr');
-        const totalColumns = rows.first().children().length;
-        const [start, end] = rangeToLeaveInPlace.map(index => index);
-        const columnIndicesToShuffle = [];
+	function shuffleColumns() {
+		const table = $('table');
+		const rows = table.find('tr');
+		const columns = rows.first().find('th').slice(1, -1);
+		const columnIndices = [...Array(columns.length).keys()];
 
-        for (let i = 1; i < totalColumns; i++) {
-            if (i < start || i > end) {
-                columnIndicesToShuffle.push(i);
-            }
-        }
+		for (let i = columnIndices.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[columnIndices[i], columnIndices[j]] = [columnIndices[j], columnIndices[i]];
+		}
 
-        for (let i = columnIndicesToShuffle.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [columnIndicesToShuffle[i], columnIndicesToShuffle[j]] = [columnIndicesToShuffle[j], columnIndicesToShuffle[i]];
-        }
+		rows.each(function () {
+			const cells = $(this).children();
+			const firstCell = cells.first();
+			const lastCell = cells.last();
+			const middleCells = cells.slice(1, -1);
 
-        rows.each(function () {
-            const cells = $(this).children();
-            const shuffledCells = [cells.eq(0)];
+			const shuffledCells = columnIndices.map(index => middleCells.eq(index));
+			$(this).empty().append(firstCell).append(shuffledCells).append(lastCell);
+		});
+	}
 
-            columnIndicesToShuffle.forEach(index => {
-                shuffledCells.push(cells.eq(index));
-            });
-
-            for (let i = start; i <= end; i++) {
-                shuffledCells.splice(i, 0, cells.eq(i));
-            }
-
-            $(this).empty().append(shuffledCells);
-        });
-    }
-
-    shuffleColumns([7, 8]);
-});
+	shuffleColumns();
+}); 

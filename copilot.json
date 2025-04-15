@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "configurations": {
+    "default": {
+      "editor": {
+        "formatOnSave": true,
+        "tabSize": 2,
+        "insertSpaces": true
+      },
+      "files": {
+        "exclude": ["**/node_modules", "**/.git"]
+      },
+      "instructions": [
+        "Never use comments in the code.",
+        "All JavaScript functions should have this syntax: $(function () { });",
+        "All functions should start with a line comment explaining very concisely what the function does. This is the only comment that can be used."
+      ]
+    }
+  }
+}
