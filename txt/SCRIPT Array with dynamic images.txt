@@ -1,4 +1,0 @@
-
-%[9]Q21_1% is the piped number ;)
-
-arrayQ2 = [0, '<img src="https://efm.nielsenhomescansurveys.com/AppData/149618683/users/2002229627/User%20Media/JORDANS/JORDANS%[9]Q21_1%.jpg" height="300" >' ] 
