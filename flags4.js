@@ -71,7 +71,7 @@ $(function () {
     console.log("selectedLabels", selectedLabels);
 
     selectedLabels.forEach((el, index) => {
-        const inputEl = document.getElementById(`Q98${index + 1}`);
+        const inputEl = document.getElementById(`Q98_${index + 1}`);
         if (inputEl) inputEl.value = el;
     });
 });

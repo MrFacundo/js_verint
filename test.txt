@@ -1,25 +1,233 @@
-    '<img src="%[48]Q264_1%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_2%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_3%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_4%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_5%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_6%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_7%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_8%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_9%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_10%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_11%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_12%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_13%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_14%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_15%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_16%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_17%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_18%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_19%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_20%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_21%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_22%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_23%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_24%" style="width: auto; height: 70px;">',
-    '<img src="%[48]Q264_25%" style="width: auto; height: 70px;">', 
+Small appliance ownership & path to purchase Survey
+Survey name: Gadget Gab survey
+Date: April/10/2025
+
+Section 1: Small Appliance Ownership
+
+1. Which of the following types of small appliances do you or your household currently own? (Select all that apply)
+; Randomize within groups
+Kitchen Items ;show header
+Toasters/ sandwich makers
+Cookers
+Mixers
+Pressure cooker
+Rice cooker
+Electric kettles
+Air fryers
+Beverage or Dessert Makers ;show header
+Coffee/tea makers
+Juicers/blenders
+Soda makers
+Ice cream/yogurt makers
+Cleaning Tools ;show header
+Regular vacuum cleaners (e.g., Upright, Canister, Handheld vacuum)
+Robot vacuums
+Steam mops
+Personal Care Devices ;show header
+Hairstyle tools: hair dryers/ curling irons
+Electric toothbrushes
+Razors
+Indoor Environment Devices ;show header 
+Humidifiers
+Air purifiers
+Fans
+Heaters
+Ironing/Clothing Care Tools ;show header
+Electric irons
+Garment steamers
+Lint removers
+
+Other small appliances (please specify:_____) ;anchor, textbox
+I don’t use or own any small appliances ;anchor, exclusive, terminate
+
+2. Which of the following small appliances have you purchased most recently in the past 12 months? 
+Select one
+;pipe in Q1 answer
+() Other small appliances (please specify:_____) ;anchor, textbox
+() I haven’t purchased any small appliances in the past 12 months ;Anchor, Terminate
+
+
+
+Ask Q2a if Q2= I haven’t purchased any small appliances in the past 12 months
+2a. What are the main reasons you have not purchased or upgraded a small appliance recently?
+(Select all that apply)
+My current appliance still works well
+Small appliances are too expensive
+I’m waiting for a sale or better deal
+I don’t see much difference between models
+Lack of space at home / no room for more appliances
+I'm unsure which brand or model to choose
+I don’t trust the product quality or durability
+Not a priority for me right now
+I prefer to borrow or use alternative tools
+I’m concerned about environmental waste from replacing products
+Other (please specify): ___________
+
+Terminate if Q2= I haven’t purchased any small appliances in the past 12 months
+
+;Code “Kitchen Items buyer” if any selections from Kitchen Items in Q1
+;Code “Beverage or Dessert Makers buyer” if any selections from Beverage or Dessert Makers in Q1
+;Code “Cleaning Tools” if any selections from Cleaning Tools in Q1
+;Code “Personal Care Devices” if any selections from Personal Care Devices in Q1
+;Code “Indoor Environment Devices” if any selections from Indoor Environment Devices in Q1
+;Code “Ironing/Clothing Care Tools” if any selections from Ironing/Clothing Care Tools in Q1
+
+
+
+3.What type of home do you live in?  
+() Detached house 
+() Semi-detached house 
+() Condominium (Condo)  
+() Apartment 
+() Townhouse 
+() Other (please specify:) >Anchor, textbox
+
+4.How much have you typically spent on your recent purchase of <pipe in Q2 answer> ? Please indicate your best estimate as a whole number.
+$						(0,9999)
+
+(Purchasing driver)
+5. What were the reasons or occasions that led you to purchase <pipe in Q2 answer> most recently? Select all that apply
+;Randomize
+It has a good price
+Promotion or discount on the product I am interested in
+It has some attractive features that my old one doesn’t have
+It looks convenient and easy to use
+It breaks down/ doesn’t function, I need to replace it
+Eye-catching design can be used for home decoration 
+Recommended by friends or family members
+Social media or influencers recommendation
+Replacing a broken or worn-out appliance
+Upgrading to a newer or better model
+Moving to a new home
+Renovating or updating the kitchen
+Seasonal promotion or deal (e.g., Black Friday, Boxing Day)
+Buying it as a gift for someone else
+Starting a new routine or hobby (e.g., healthy eating, baking, meal prep)
+Preparing for a special event or occasion (e.g., party, holiday gathering)
+Saw it in-store or online and decided to try it
+Wanted something that looks better or matches kitchen decor
+Just wanted to try a new appliance (e.g., air fryer, espresso machine)
+Others reasons: (please specify_________) ;anchor, textbox
+
+
+6. When choosing a small appliance, which of the following features are most important to you? Please select top 5 features and rank from the most important to the 5th important.
+Reliable performance / does the job well
+Easy to use
+Easy to clean or maintain
+Compact or space-saving design
+Stylish appearance / matches kitchen decor
+Brand reputation
+Energy efficiency
+Smart technology (e.g., app control, voice assistant compatible)
+Multi-functionality (e.g., one device that does several tasks)
+Quiet operation
+Safety features (e.g., auto shut-off, cool-touch surface)
+Long warranty or durable build quality
+Positive customer reviews
+Price / value for money
+Other (please specify): ___________
+
+
+7. How would you rate your satisfaction with <pipe in Q2 answer>?
+() Very satisfied
+() Satisfied
+() Neutral
+() Dissatisfied
+() Very dissatisfied
+
+Q7 = dissatisfied or very dissatisfied selected
+8. You mentioned that you are not satisfied with the <pipe in Q4 answer> purchasing, which of the following best describes your experience with the product?
+;Randomize
+Poor quality
+Hard to use
+Didn’t work as expected
+Looks unattractive or outdated
+Broke or wore out quickly
+Worse than other similar products I’ve used
+Instructions were confusing or missing
+Other reasons: (please specify_________) ;anchor, textbox
+
+
+
+Section 2: Path to Buy Small Appliances
+
+10. When you think about buying small appliances, which store comes to your mind first? (Please select all that apply)
+In-store ;show header > group 1
+Walmart
+Costco (in-store or online)
+Best Buy / BestBuy.ca
+Amazon.ca
+Canadian Tire
+IKEA
+The Home Depot
+The Brick
+Brand-specific stores (e.g., Dyson, KitchenAid, Nespresso, or their online stores)
+Wayfair.ca
+Shoppers Drug Mart
+Jean Coutu
+Conventional grocery stores (e.g., Co-Op, Zehrs, Loblaws, etc.) 
+Others online stores: (please specify_________) ;anchor, textbox
+
+Please add a question regarding the store they consider to shop
+
+11. Which stores would you consider to shop <pipe in Q2 answer> from? (Please select all that apply)
+; Insert same list as Q10
+
+12. Which store did you shop at for the recent purchasing of <pipe in Q2 answer>? Select one 
+; pipe in Q10 answer
+
+(Store choice driver)
+13. Thinking about the last time you bought a small appliance, why did you choose to shop at <pipe in Q12 store> instead of another store? Select all that may apply
+;Randomize
+Convenient location 
+In-store events and community engagement 
+Competitive low prices 
+Positive past shopping experiences
+Free or low-cost home delivery 
+Free in-store or curbside pickup 
+Free or low-cost extended warranty or protection plan
+Bought together with other items (e.g., groceries, furniture, etc.)
+User-friendly website and mobile app 
+Wider selection of brands or models
+Exclusive discounts and promotions
+Easy returns/exchanges
+Helpful customer service (e.g., knowledgeable advice, assistance with loading, etc.)
+Trust in product quality from that store
+Loyalty points or membership rewards
+Saw the product in-store and liked the display
+Bought together with other items (e.g., groceries, furniture, etc.)
+I always shop there for appliances
+Others: (please specify_________) ;anchor, textbox
+
+
+14. Which types of promotions would make you more likely to buy a small appliance?
+(Select all that apply)
+Discounted / lowest price
+Bundle deal (e.g., buy one appliance, get another at a discount)
+Free gift with purchase
+Limited-time offer or flash sale
+Loyalty points or cashback
+Interest-free financing or payment plan
+Coupon or promo code
+Price match guarantee
+Free extended warranty
+Free or low-cost delivery
+Trade-in offer for old appliances
+None of the above
+Other (please specify): ___________
+
+15. How important are the following retail services when deciding where to buy a small appliance?
+(Rate each on a scale from 1 to 5, where 1 = Not at all important and 5 = Extremely important)
+Retail Service		1 – Not at all important	2	3	4	5 – Extremely important
+Free or low-cost home delivery		⭘	⭘	⭘	⭘	⭘
+Free in-store or curbside pickup		⭘	⭘	⭘	⭘	⭘
+Easy return or exchange process		⭘	⭘	⭘	⭘	⭘
+Option to see and test the product in-store		⭘	⭘	⭘	⭘	⭘
+Availability of extended warranty		⭘	⭘	⭘	⭘	⭘
+Staff assistance (e.g., loading, questions)		⭘	⭘	⭘	⭘	⭘
+
+
+
+
+
+
