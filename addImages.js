@@ -17,5 +17,5 @@ $(function () {
         console.log("Set value of #" + qid + "_" + j + " to:", arrayI[j]);
     }
 
-    //$("#BN").click();
+    $("#BN").click();
 });

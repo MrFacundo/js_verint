@@ -1,15 +1,24 @@
 // Set the value of a question field based on previous answers, so it can be used as a flag in subsequent questions
 $(function () {
-    const fieldsetId = "Q350_WRAPPER";
-    const fieldsetEl = document.getElementById(fieldsetId);
-    const values = [
-        "%[L6]Q319_1%", "%[L6]Q319_2%", "%[L6]Q319_3%", "%[L6]Q319_4%", "%[L6]Q319_5%",
-        "%[L6]Q319_6%", "%[L6]Q319_7%", 
-        "%[L9]Q323_1%", "%[L9]Q323_2%", "%[L9]Q323_3%", "%[L9]Q323_4%", "%[L9]Q323_5%",
-        "%[L9]Q323_6%", "%[L9]Q323_7%"
+    const answers = [
+        "%[1_1]Q388_A_99%",
+        "%[1_1]Q388_A_100%",
+        "%[1_1]Q388_A_101%",
+        "%[1_1]Q388_A_102%",
+        "%[1_1]Q388_A_103%",
+        "%[1_1]Q388_A_104%",
+        "%[1_1]Q388_A_105%",
+        "%[1_1]Q388_A_106%",
+        "%[1_1]Q388_A_107%",
+        "%[1_1]Q388_A_108%",
+        "%[1_1]Q388_A_109%",
+        "%[1_1]Q388_A_110%",
+        "%[1_1]Q388_A_111%" 
     ];
-    const wasSelected = values.some(value => value == 1);
-    fieldsetEl.querySelector("input[type='text']").value = wasSelected ? 1 : 0;
-
+    const anyUnselected = answers.some(a => a === "0");
+    const anySelected = answers.some(a => a === "1");
+    $('#Q391_1').val(anyUnselected ? "1" : "");
+    $('#Q391_2').val(anySelected ? "1" : "");
     $('#BN').trigger('click');
-}); 
+});
+

@@ -1,15 +1,13 @@
 $(function () {
     const qid = $("input[type=text]").eq(0).attr("id").split("_")[0];
     const txtLabels = [
-        "Normalerweise entscheide ich mich im Geschäft für den Kauf des Produkts.",
-        "Es ist ein optionales Lebensmittel - es ist keine große Sache, wenn es im Kühlschrank fehlt.",
-        "Ich probiere gerne verschiedene/neue Marken aus.",
-        "Die Produkte in dieser Kategorie sind sich sehr ähnlich.",
-        "Ich suche nicht nach Informationen, bevor ich solche Produkte kaufe.",
-        "Ich bleibe lieber bei den klassischen Geschmacksrichtungen.",
-        "Ich achte nicht auf Etiketten und Zertifikate.",
-        "Der Kauf dieses Produkts ist nie der Hauptgrund für den Einkauf."
-    ];
+        "Some brands of baby wipes cost more because they are better",
+        "All brands of baby wipes are about the same",
+        "I buy average quality baby wipes to save money",
+        "I use baby wipes because they are convenient",
+        "I am willing to pay a little more since inexpensive baby wipes are not good quality",
+        "I have no preferred baby wipe brand"
+        ];
 
     txtLabels.forEach((label, i) => {
         const index = i + 1;
