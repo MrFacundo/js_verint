@@ -1,57 +1,71 @@
 // Allows a matrix question to be cskipped, validates if question is not skipped
 $(function () {
-	const skipQuestionSelector = "#Q306_1"
-	const validationMessage = "Merci de répondre à la question pour poursuivre."
-	const skipQuestionTextSelector = "#Q306_QUESTION_TEXT";
-	
-	$(skipQuestionTextSelector).hide();
+	const skipSelector = "#Q306_1";
+	const skipTextSelector = "#Q306_QUESTION_TEXT";
+	const validationMessage = "Merci de répondre à la question pour poursuivre.";
+	const submitSelector = "#BN";
+	const hiddenFieldId = "pleaseSpecifyQ";
 
-	$(skipQuestionSelector).on("change", function () {
-		if ($(this).is(":checked")) {
-			$("table input[type=radio]").prop("checked", false).attr("aria-checked", "false");
-		}
-	});
-	$("table input[type=radio]").on("change", function () {
-		if ($(this).is(":checked")) {
-			$(skipQuestionSelector).prop("checked", false).attr("aria-checked", "false");
-		}
-	});
+	const $skip = $(skipSelector);
+	const $skipText = $(skipTextSelector);
+	const $firstFieldset = $('fieldset').first();
+	const $submit = $(submitSelector);
+	const $hiddenField = $('#' + hiddenFieldId);
+    const $hiddenInput = $hiddenField.find('input');
 
-	function showValidation(msg) {
+	$skipText.hide();
+
+	const clearRadios = () => {
+		const selector = $('table').length > 0
+			? 'table input[type="radio"]'
+			: 'fieldset:first ol input[type="radio"]';
+		$(selector).prop("checked", false).attr("aria-checked", "false");
+	};
+
+	const showValidation = (msg) => {
 		$('.validation-message').remove();
-		$('fieldset').first().append(`<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`);
-	}
+		$firstFieldset.append(
+			`<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`
+		);
+	};
 
-	function checkInputs(event, msg) {
-		let $firstFieldset = $('fieldset').first();
-		let rows = $firstFieldset.find('tbody tr');
-		let allRowsValid = true;
+	const isValidInput = () => {
+		if ($skip.is(":checked")) return true;
 
-		rows.each(function () {
-			let rowValid = $(this).find('td input[type="radio"]').is(':checked');
-			if (!rowValid) {
-				allRowsValid = false;
-				return false;
+		const selector = $('table').length > 0
+			? 'tbody tr'
+			: 'ol';
+
+		return $firstFieldset.find(selector).toArray().every(item =>
+			$(item).find('input[type="radio"]').is(':checked')
+		);
+	};
+
+	$skip.on("change click", function () {
+		if ($(this).is(":checked")) {
+			clearRadios();
+			if (hiddenFieldId) {
+				$hiddenField.hide();
+				$hiddenInput.val('');
 			}
-		});
-
-		if (allRowsValid) {
-			console.log("valid");
-			$('.validation-message').remove();
-		} else {
-			console.log("invalid");
-			event.preventDefault();
-			showValidation(msg);
 		}
-	}
+	});
 
-	$('#BN').on('click', function (e) {
-		const skip = $(skipQuestionSelector).is(":checked");
-		if (skip) {
-			$('.validation-message').remove();
-			console.log("Question skipped")
+	$firstFieldset.on("change", 'input[type="radio"]', function () {
+		if ($(this).is(":checked")) {
+			$skip.prop("checked", false).attr("aria-checked", "false");
+		}
+	});
+
+	$submit.on('click', function (e) {
+		$('.validation-message').remove();
+
+		if (!isValidInput()) {
+			e.preventDefault();
+			showValidation(validationMessage);
+			console.log("invalid");
 		} else {
-			checkInputs(e, validationMessage);
+			console.log($skip.is(":checked") ? "Question skipped" : "valid");
 		}
 	});
 });
