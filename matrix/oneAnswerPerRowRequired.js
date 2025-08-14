@@ -1,30 +1,55 @@
-// Validation: At least one answer per row is required
+// One checked checkbox per visible row is required
 $(function () {
-    function checkInputs(event, validationMessage) {
-        let $firstFieldset = $('fieldset').first();
-        let rows = $firstFieldset.find('tbody tr');
-        let allRowsValid = true;
+    const validationMessage = "Please answer this question before continuing.";
+    
+    const $fieldset = $('fieldset');
 
-        rows.each(function () {
-            let rowValid = $(this).find('td input[type="radio"]').is(':checked');
-            if (!rowValid) {
-                allRowsValid = false;
-                return false;
-            }
-        });
+    const getVisibleRows = () => {
+        return $('table tbody tr').not('[style="display: none;"]').not('.choice-row');
+    };
 
-        if (allRowsValid) {
-            console.log("valid");
-        } else {
-            console.log("invalid");
-            event.preventDefault();
-            $('.validation-message').remove();
-            const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert" style="">${validationMessage}</div>`;
-            $('fieldset').append(alertHtml);
+    const getVisibleOlElements = () => {
+        return $('div.response-area ol').not('[style="display: none;"]').not('.choice-row');
+    };
+
+    const hasCheckedInput = ($element, selector) => {
+        return $element.find(selector + ' input:checked').length > 0;
+    };
+
+    const showValidation = (msg) => {
+        if ($('.validation-message').length === 0) {
+            const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`;
+            $fieldset.append(alertHtml);
         }
-    }
+    };
 
-    $('#BN').on('click', function (event) {
-        checkInputs(event, "Debe responder a todas las afirmaciones antes de enviar la encuesta.");
+    const isValidInput = () => {
+        const $visibleRows = getVisibleRows();
+        
+        if ($visibleRows.length > 0) {
+            return $visibleRows.toArray().every(row => 
+                hasCheckedInput($(row), 'td')
+            );
+        }
+        
+        const $visibleOls = getVisibleOlElements();
+        return $visibleOls.toArray().every(ol => 
+            hasCheckedInput($(ol), 'li')
+        );
+    };
+
+    const checkInputs = (event, msg) => {
+        $('.validation-message').remove();
+        
+        if (!isValidInput()) {
+            event.preventDefault();
+            showValidation(msg);
+        } else {
+            console.log("valid");
+        }
+    };
+
+    $('#BN').on('click', function(event) {
+        checkInputs(event, validationMessage);
     });
 });

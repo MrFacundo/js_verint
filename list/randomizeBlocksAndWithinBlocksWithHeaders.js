@@ -1,7 +1,7 @@
 $(function () {
     // Randomizes blocks of list items and the items within each block, while keeping the headers in place.
-    function randomizeListBlocks($list, fixedRange, shuffleBlocks) {
-        const listItems = $list.children('li').toArray();
+    function randomizeListBlocks(fixedRange, shuffleBlocks) {
+        const listItems = $('.response-set').children('li').toArray();
         const blocks = [];
         let currentBlock = [];
         let optionCount = 0;
@@ -48,6 +48,5 @@ $(function () {
         return array;
     }
 
-    const $originalList = $('.response-set');
-    randomizeListBlocks($originalList, [25, 26], false);
+    randomizeListBlocks([25, 26], false);
 });

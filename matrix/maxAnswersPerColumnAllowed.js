@@ -1,49 +1,50 @@
 // Validation: No more than n answers per column are allowed
 $(function () {
-    function checkMaxInputs(event, validationMessage, maxInputs) {
-        let $firstFieldset = $('fieldset').first();
-        let result = [];
+    const maxInputs = 5;
+    const validationMessage = `Veuillez sélectionner jusqu'à ${maxInputs} critères par produit / par colonne.`;
+    
+    const $firstFieldset = $('fieldset').first();
+    const isDesktopLayout = $firstFieldset.find('table').length > 0;
 
-        if ($firstFieldset.find('table').length > 0) {
-            // Desktop layout
-            let rows = $firstFieldset.find('tbody tr');
-            let numCols = rows.first().find('td input[type="checkbox"]').length;
-            result = Array.from({ length: numCols }, () => []);
+    const getColumnCounts = () => {
+        const selector = isDesktopLayout ? 'tbody tr' : 'ol';
+        const inputSelector = isDesktopLayout ? 'td input[type="checkbox"]' : 'li input[type="checkbox"]';
 
-            // Map the input values to a 2D array
-            rows.each(function () {
-                $(this).find('td input[type="checkbox"]').each(function (index) {
-                    result[index].push($(this).is(':checked') ? 1 : 0);
-                });
+        const $rows = $firstFieldset.find(selector);
+        const numCols = $rows.first().find(inputSelector).length;
+        const result = Array.from({ length: numCols }, () => []);
+
+        $rows.each(function () {
+            $(this).find(inputSelector).each(function (index) {
+                result[index].push($(this).is(':checked') ? 1 : 0);
             });
-        } else {
-            // Mobile layout
-            let olElements = $firstFieldset.find('ol');
-            let numCols = olElements.first().find('li input[type="checkbox"]').length;
-            result = Array.from({ length: numCols }, () => []);
+        });
 
-            // Map the input values to a 2D array
-            olElements.each(function () {
-                $(this).find('li input[type="checkbox"]').each(function (index) {
-                    result[index].push($(this).is(':checked') ? 1 : 0);
-                });
-            });
-        }
+        return result;
+    };
 
-        let anyColumnInvalid = result.some(col => col.filter(value => value === 1).length > maxInputs);
-        
+    const showValidation = (msg) => {
+        $('.validation-message').remove();
+        const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`;
+        $firstFieldset.append(alertHtml);
+    };
+
+    const checkMaxInputs = (event, msg, max) => {
+        const columnCounts = getColumnCounts();
+        const anyColumnInvalid = columnCounts.some(col =>
+            col.filter(value => value === 1).length > max
+        );
+
         if (anyColumnInvalid) {
-            console.log("invalid");
             event.preventDefault();
-            $('.validation-message').remove();
-            const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert" style="">${validationMessage}</div>`;
-            $('fieldset').append(alertHtml);
+            showValidation(msg);
+            console.log("invalid");
         } else {
             console.log("valid");
         }
-    }
+    };
 
     $('#BN').on('click', function (event) {
-        checkMaxInputs(event, "Veuillez sélectionner jusqu'à 5 critères par produit / par colonne.", 5);
+        checkMaxInputs(event, validationMessage, maxInputs);
     });
 });

@@ -13,7 +13,7 @@ $(function () {
             $(this).hide();
           }
         });
-      } else if ($responseArea.length) {
+      } else {
 		// mobile layout
         const $lists = $responseArea.find('ol');
         $lists.each(function () {

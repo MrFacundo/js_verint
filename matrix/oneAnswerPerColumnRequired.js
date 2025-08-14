@@ -1,49 +1,60 @@
-// Validation: At least one answer per column is required
+// Checks that at least one checkbox is checked in each visible column (table or mobile)
 $(function () {
-    function checkInputs(event, validationMessage) {
-        let $firstFieldset = $('fieldset').first();
-        let result = [];
+    const validationMessage = "Debe responder a todas las afirmaciones antes de enviar la encuesta.";
 
-        if ($firstFieldset.find('table').length > 0) {
-            // Desktop layout
-            let rows = $firstFieldset.find('tbody tr');
-            let numCols = rows.first().find('td input[type="checkbox"]').length;
-            result = Array.from({ length: numCols }, () => []);
+    const $firstFieldset = $('fieldset').first();
+    const isDesktopLayout = $firstFieldset.find('table').length > 0;
 
-            // Map the input values to a 2D array
-            rows.each(function () {
-                $(this).find('td input[type="checkbox"]').each(function (index) {
-                    result[index].push($(this).is(':checked') ? 1 : 0);
-                });
+    const getVisibleColumnIndexes = () => {
+        const $headers = isDesktopLayout
+            ? $firstFieldset.find('thead th')
+            : $firstFieldset.find('ol').first().find('li');
+
+        return $headers.toArray()
+            .map((el, i) => ({ element: $(el), index: i }))
+            .filter(({ element, index }) =>
+                index > 0 && element.css('display') !== 'none' && element.is(':visible')
+            )
+            .map(({ index }) => index);
+    };
+
+    const getColumnData = (visibleIndexes) => {
+        const $rows = isDesktopLayout
+            ? $firstFieldset.find('tbody tr')
+            : $firstFieldset.find('ol');
+        const cellSelector = isDesktopLayout ? 'td' : 'li';
+
+        const result = Array.from({ length: visibleIndexes.length }, () => []);
+
+        $rows.each(function () {
+            const $cells = $(this).find(cellSelector);
+            visibleIndexes.forEach((colIdx, arrIdx) => {
+                const checked = $cells.eq(colIdx).find('input[type="checkbox"]').is(':checked') ? 1 : 0;
+                result[arrIdx].push(checked);
             });
-        } else {
-            // Mobile layout
-            let olElements = $firstFieldset.find('ol');
-            let numCols = olElements.first().find('li input[type="checkbox"]').length;
-            result = Array.from({ length: numCols }, () => []);
+        });
 
-            // Map the input values to a 2D array
-            olElements.each(function () {
-                $(this).find('li input[type="checkbox"]').each(function (index) {
-                    result[index].push($(this).is(':checked') ? 1 : 0);
-                });
-            });
-        }
+        return result;
+    };
 
-        let allColumnsValid = result.every(col => col.some(value => value === 1));
-        
-        if (allColumnsValid) {
-            console.log("valid");
-        } else {
-            console.log("invalid");
+    const showValidation = (msg) => {
+        $('.validation-message').remove();
+        const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`;
+        $firstFieldset.append(alertHtml);
+    };
+
+    const checkInputs = (event, msg) => {
+        const visibleIndexes = getVisibleColumnIndexes();
+        const columnData = getColumnData(visibleIndexes);
+        const allColumnsValid = columnData.every(col => col.some(value => value === 1));
+
+        if (!allColumnsValid) {
             event.preventDefault();
-            $('.validation-message').remove();
-            const alertHtml = `<div tabindex="0" class="alert alert-danger validation-message" role="alert" style="">${validationMessage}</div>`;
-            $('fieldset').append(alertHtml);
+            showValidation(msg);
         }
-    }
+    };
 
     $('#BN').on('click', function (event) {
-        checkInputs(event, "Debe responder a todas las afirmaciones antes de enviar la encuesta.");
+        checkInputs(event, validationMessage);
     });
 });
