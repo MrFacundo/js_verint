@@ -9,5 +9,5 @@ $(function () {
     const wasNotSelected = values.every(value => value == 0);
     fieldsetEl.querySelector("input[type='text']").value = wasNotSelected ? 1 : 0;
 
-    $('#BN').trigger('click');
+    $('#BN').click();
 }); 

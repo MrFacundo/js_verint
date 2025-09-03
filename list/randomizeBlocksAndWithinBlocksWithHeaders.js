@@ -1,21 +1,44 @@
+ // Randomizes blocks of list items and the items within each block, while keeping the headers in place.
 $(function () {
-    // Randomizes blocks of list items and the items within each block, while keeping the headers in place.
-    function randomizeListBlocks(fixedRange, shuffleBlocks) {
-        const listItems = $('.response-set').children('li').toArray();
-        const blocks = [];
-        let currentBlock = [];
-        let optionCount = 0;
-        const fixedOptions = [];
+    const fixedRanges = [[14, 15], [25]];
+    const shuffleBlocks = true;
+    
+    const $list = $('.response-set');
 
-        listItems.forEach(item => {
+    const shuffle = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+
+    const isFixed = (num) => {
+        return fixedRanges.some(range => 
+            range.length === 1 ? num === range[0] : num >= range[0] && num <= range[1]
+        );
+    };
+
+    const randomizeListBlocks = () => {
+        const items = $list.children('li').toArray();
+        const blocks = [];
+        const fixed = {};
+        let currentBlock = [];
+        let count = 0;
+
+        items.forEach(item => {
             const $item = $(item);
             if ($item.hasClass('choice-group')) {
                 if (currentBlock.length > 0) blocks.push(currentBlock);
                 currentBlock = [$item];
             } else if ($item.hasClass('response select-area')) {
-                optionCount++;
-                if (optionCount >= fixedRange[0] && optionCount <= fixedRange[1]) {
-                    fixedOptions.push($item);
+                count++;
+                if (isFixed(count)) {
+                    const groupIndex = fixedRanges.findIndex(range => 
+                        range.length === 1 ? count === range[0] : count >= range[0] && count <= range[1]
+                    );
+                    if (!fixed[groupIndex]) fixed[groupIndex] = [];
+                    fixed[groupIndex].push({ item: $item, pos: count - 1 });
                 } else {
                     currentBlock.push($item);
                 }
@@ -24,29 +47,23 @@ $(function () {
 
         if (currentBlock.length > 0) blocks.push(currentBlock);
 
-        const shuffledBlocks = blocks.map(block => {
-            const header = block.shift();
-            return [header, ...shuffle(block)];
-        });
+        const shuffled = blocks.map(block => {
+            const [header, ...rest] = block;
+            return [header, ...shuffle([...rest])];
+        }).flat();
 
         if (shuffleBlocks) {
-            shuffle(shuffledBlocks);
+            Object.values(fixed).forEach(group => {
+                if (group.length > 1) shuffle(group.map(g => g.item));
+            });
         }
 
-        const newListItems = shuffledBlocks.flat().concat(fixedOptions);
+        Object.values(fixed).flat().forEach(({ item, pos }) => {
+            shuffled.splice(pos, 0, item);
+        });
 
-        $list.append(newListItems);
-    }
+        $list.empty().append(shuffled);
+    };
 
-    function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-        }
-        return array;
-    }
-
-    randomizeListBlocks([25, 26], false);
+    randomizeListBlocks();
 });

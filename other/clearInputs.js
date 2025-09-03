@@ -2,7 +2,7 @@
 $(function () {
     function clearInputValues() {
         for (let index = 1; index <= 3; index++) {
-            const inputEl = document.getElementById(`Q98${index}`);
+            const inputEl = document.getElementById(`Q571${index}`);
             if (inputEl) inputEl.value = "";
         }
     }

@@ -1,67 +1,56 @@
 //Hides matrix columns based on previous responses.
 $(function () {
-    const items = [
-        "%[0.1_1]Q384_A_99%",
-        "%[0.1_1]Q384_A_100%",
-        "%[0.1_1]Q384_A_101%",
-        "%[0.1_1]Q384_A_102%",
-        "%[0.1_1]Q384_A_103%",
-        "%[0.1_1]Q384_A_104%",
-        "%[0.1_1]Q384_A_105%",
-        "%[0.1_1]Q384_A_106%",
-        "%[0.1_1]Q384_A_107%",
-        "%[0.1_1]Q384_A_108%",
-        "%[0.1_1]Q384_A_109%",
-        "%[0.1_1]Q384_A_110%",
-        "%[0.1_1]Q384_A_111%"
+    const responses = [
+        "%[6a]Q427LBL_1%", "%[6a]Q427LBL_2%", "%[6a]Q427LBL_3%", "%[6a]Q427LBL_4%",
+        "%[6a]Q427LBL_5%", "%[6a]Q427LBL_6%", "%[6a]Q427LBL_7%", "%[6a]Q427LBL_8%",
+        "%[6a]Q427LBL_9%", "%[6a]Q427LBL_10%", "%[6a]Q427LBL_11%", "%[6a]Q427LBL_12%",
+        "%[6a]Q427LBL_13%", "%[6a]Q427LBL_14%", "%[6a]Q427LBL_15%", "%[6a]Q427LBL_16%",
+        "%[6a]Q427LBL_17%", "%[6a]Q427LBL_18%", "%[6a]Q427LBL_19%", "%[6a]Q427LBL_20%",
+        "%[6a]Q427LBL_21%", "%[6a]Q427LBL_22%", "%[6a]Q427LBL_23%", "%[6a]Q427LBL_24%",
+        "%[6a]Q427LBL_25%", "Ninguna"
     ];
+    const conditionToExclude = "";
+    const fieldsetSelector = 'fieldset';
 
-    const indexes = items.reduce((result, item, index) => {
-        if (item === "1") {
+    const indexes = responses.reduce((result, item, index) => {
+        if (item === conditionToExclude) {
             result.push(index);
         }
         return result;
     }, []);
-    console.log("items", items);
-    console.log("indexes", indexes);
 
-    const selector = 'fieldset';
+    const $fieldset = $(fieldsetSelector);
+    const $table = $fieldset.find('table');
 
-    function hideTableColumns(indexes) {
-        let $table = $(selector + ' table');
+    const hideTableColumns = (indexesToHide) => {
         $table.find('tr').each((_, row) => {
             $(row).children().each((colIndex, cell) => {
-                if (indexes.includes(colIndex - 1) && colIndex > 0) {
+                if (indexesToHide.includes(colIndex - 1) && colIndex > 0) {
                     $(cell).hide();
                 }
             });
         });
-    }
+    };
 
-    function hideListItems(indexes) {
-        let $fieldset = $(selector);
-        let $listItems = $fieldset.find('ol').not('.choice-row');
-
-        $listItems.each((index, item) => {
-            if (indexes.includes(index)) {
-                $(item).hide();
-            } else {
-                $(item).show();
-            }
+    const hideListItems = (indexesToHide) => {
+        $fieldset.find('ol').not('.choice-row').each((_, set) => {
+            $(set).children('li.response.select-area').each((index, item) => {
+                if (indexesToHide.includes(index)) {
+                    $(item).hide();
+                } else {
+                    $(item).show();
+                }
+            });
         });
+    };
+
+    if ($fieldset.find('tbody').length) {
+        hideTableColumns(indexes);
+    } else {
+        hideListItems(indexes);
     }
 
-    function hideContent(indexes) {
-        if ($(selector + ' tbody').length) {
-            hideTableColumns(indexes);
-        } else {
-            hideListItems(indexes);
-        }
-    }
-
-    hideContent(indexes);
-    let $table = $(selector + ' table');
-    let $colgroups = $table.find('colgroup');
+    const $colgroups = $table.find('colgroup');
     if ($colgroups.length > 1) {
         $colgroups.eq(1).removeAttr('style');
     }

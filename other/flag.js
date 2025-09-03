@@ -19,6 +19,6 @@ $(function () {
     const anySelected = answers.some(a => a === "1");
     $('#Q391_1').val(anyUnselected ? "1" : "");
     $('#Q391_2').val(anySelected ? "1" : "");
-    $('#BN').trigger('click');
+    $('#BN').click();
 });
 

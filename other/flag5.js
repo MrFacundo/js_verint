@@ -18,5 +18,5 @@ $(function () {
         anyFlagTrue = anyFlagTrue || isAnyTrue;
     });
     $('#Q210_9').val(anyFlagTrue ? 1 : 0);
-    //$('#BN').trigger('click');
+    //$('#BN').click();
 });
