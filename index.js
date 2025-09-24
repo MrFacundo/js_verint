@@ -1,3 +1,2 @@
-export function greet(name) {
-	return `Hello, ${name}!`;
-}
+import { autoSelect } from "./list/autoSelect.js";
+export { autoSelect };

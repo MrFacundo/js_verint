@@ -1,8 +1,8 @@
 // Auto select if there is only one option. Does nothing if this page was reached using the back button.
-$(function () {
+export function autoSelect() {
     function checkAndClick() {
-		if (localStorage.getItem('buttonq3') === 'BB')
-			return;
+        if (localStorage.getItem('buttonq3') === 'BB')
+            return;
         const liElements = $('div.response-area li');
 
         if (liElements.length === 1) {
@@ -12,6 +12,5 @@ $(function () {
             $('#BN').click();
         }
     }
-
     checkAndClick();
-});
+}
