@@ -3,7 +3,6 @@ $(function () {
     const triggerInputId = "Q242_A_13_1";
     const hiddenFieldId = "pleaseSpecifyQ";
     const validationMessage = "Vous avez sélectionné 'Autres', merci de préciser.";
-    const submitSelector = "#BN";
 
     const $triggerInput = $('#' + triggerInputId);
     const $hiddenField = $('#' + hiddenFieldId);
@@ -49,7 +48,7 @@ $(function () {
 
     initializeToggle();
 
-    $(submitSelector).on('click', function (e) {
+    $("#BN").on('click', function (e) {
         if (!isValidInput()) {
             e.preventDefault();
             showValidation(validationMessage);

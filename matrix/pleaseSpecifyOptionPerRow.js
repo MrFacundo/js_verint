@@ -1,7 +1,4 @@
-/*
-    Show/hide a hidden field based on the selection of a radio button or checkbox.
-*/
-
+// Show/hide a hidden field based on the selection of a radio button or checkbox in a specific row.
 $(function () {
     const pleaseSpecifyRow = 13;
     const pleaseSpecifyId = "pleaseSpecifyQ";

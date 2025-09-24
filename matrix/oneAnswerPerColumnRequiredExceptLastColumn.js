@@ -1,4 +1,4 @@
-// Validation: At least one answer per column is required, except for the last column
+// At least one answer per column is required, except for the last column. Validates on form submission.
 $(function () {
     function checkInputs(event, validationMessage) {
         let $firstFieldset = $('fieldset').first();

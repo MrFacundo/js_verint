@@ -1,44 +1,61 @@
-/*
-    Show/hide a hidden field based on the selection of a radio button or checkbox in a specific column.
-*/
-
+// Show/hide a hidden field based on the selection of a radio button or checkbox in a specific column.
 $(function () {
-    function toggleHiddenFieldVisibilityByColumn(columnIndex, pleaseSpecifyId) {
-        let $allInputEls = $('tbody tr').find('td input[type="radio"], td input[type="checkbox"]');
-        let $columnInputEls = $('tbody tr').find(`td:nth-child(${columnIndex + 1}) input[type="radio"], td:nth-child(${columnIndex + 1}) input[type="checkbox"]`);
-        let $allOlInputEls = $('ol').find('input[type="radio"], input[type="checkbox"]');
-        let $olColumnInputEls = $('ol').find(`li:nth-child(${columnIndex + 1}) input[type="radio"], li:nth-child(${columnIndex + 1}) input[type="checkbox"]`);
+    const columnIndex = 7;
+    const pleaseSpecifyId = "pleaseSpecifyQ";
+    const validationMessage = "Vous avez sélectionné 'Autres', merci de préciser.";
 
-        $allInputEls.add($allOlInputEls).on('change', function () {
-            checkInputEls($columnInputEls.add($olColumnInputEls), pleaseSpecifyId);
-        });
+    const $pleaseSpecifyField = $('#' + pleaseSpecifyId);
+    const $pleaseSpecifyInput = $pleaseSpecifyField.find('input');
+    const $firstFieldset = $('fieldset').first();
 
-        function checkInputEls($inputEls) {
-            if ($inputEls.filter(':checked').length > 0) {
-                $('#' + pleaseSpecifyId).show();
-            } else {
-                $('#' + pleaseSpecifyId).hide();
-                $('#' + pleaseSpecifyId).find('input').val('');
-            }
+    const getColumnInputs = () => {
+        let $tableInputs = $('tbody tr').find(`td:nth-child(${columnIndex + 1}) input[type="radio"], td:nth-child(${columnIndex + 1}) input[type="checkbox"]`);
+        let $olInputs = $('ol').find(`li:nth-child(${columnIndex + 1}) input[type="radio"], li:nth-child(${columnIndex + 1}) input[type="checkbox"]`);
+        return $tableInputs.add($olInputs);
+    };
+
+    const showHiddenField = () => {
+        $pleaseSpecifyField.show();
+    };
+
+    const hideHiddenField = () => {
+        $pleaseSpecifyField.hide();
+        $pleaseSpecifyInput.val('');
+    };
+
+    const toggleHiddenField = () => {
+        if (getColumnInputs().filter(':checked').length > 0) {
+            showHiddenField();
+        } else {
+            hideHiddenField();
         }
-    }
+    };
 
-    function validate(event,pleaseSpecifyId) {
-        let pleaseSpecifyFieldIsVisible = $('#' + pleaseSpecifyId).is(':visible');
-        let pleaseSpecifyFieldIsEmpty = $('#' + pleaseSpecifyId).find('input').val() === '';
-
-        if (pleaseSpecifyFieldIsVisible && pleaseSpecifyFieldIsEmpty) {
-            event.preventDefault();
-            $('fieldset').first().find('.validation-message').show();
-        }
-    }
-
-    toggleHiddenFieldVisibilityByColumn(7, "pleaseSpecifyQ");
-
-    $('#BN').on('click', function (event) {
-        validate(
-            event,
-            "pleaseSpecifyQ"
+    const showValidation = (msg) => {
+        $('.validation-message').remove();
+        $firstFieldset.append(
+            `<div tabindex="0" class="alert alert-danger validation-message" role="alert">${msg}</div>`
         );
+    };
+
+    const isValidInput = () => {
+        return !($pleaseSpecifyField.is(':visible') && $pleaseSpecifyInput.val().trim() === '');
+    };
+
+    const initializeToggle = () => {
+        $pleaseSpecifyInput.val('');
+        $pleaseSpecifyField.hide();
+        let $allInputs = $('tbody tr').find('td input[type="radio"], td input[type="checkbox"]')
+            .add($('ol').find('input[type="radio"], input[type="checkbox"]'));
+        $allInputs.on('change', toggleHiddenField);
+    };
+
+    initializeToggle();
+
+    $("#BN").on('click', function (e) {
+        if (!isValidInput()) {
+            e.preventDefault();
+            showValidation(validationMessage);
+        }
     });
 });

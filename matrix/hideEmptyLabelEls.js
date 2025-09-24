@@ -1,4 +1,4 @@
-/* Hides all tr (for desktop layout) or li (for mobile layout)elements that contain empty label elements*/
+// Hides all tr (for desktop layout) or li (for mobile layout)elements that contain empty label elements
 $(function () {
     $('fieldset').each(function () {
       const $fieldset = $(this);

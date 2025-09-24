@@ -1,4 +1,4 @@
-// Allows a matrix question to be skipped, validates if question is not skipped
+// Allows a matrix question to be skipped, validates on submit if question is not skipped
 $(function () {
 	const skipSelector = "#Q306_1";
 	const skipTextSelector = "#Q306_QUESTION_TEXT";

@@ -1,4 +1,4 @@
-//Hides matrix columns based on previous responses.
+// Hides matrix columns based on previous responses.
 $(function () {
     const responses = [
         "%[6a]Q427LBL_1%", "%[6a]Q427LBL_2%", "%[6a]Q427LBL_3%", "%[6a]Q427LBL_4%",
@@ -9,17 +9,16 @@ $(function () {
         "%[6a]Q427LBL_21%", "%[6a]Q427LBL_22%", "%[6a]Q427LBL_23%", "%[6a]Q427LBL_24%",
         "%[6a]Q427LBL_25%", "Ninguna"
     ];
-    const conditionToExclude = "";
-    const fieldsetSelector = 'fieldset';
+    const valueToExclude = "";
 
     const indexes = responses.reduce((result, item, index) => {
-        if (item === conditionToExclude) {
+        if (item === valueToExclude) {
             result.push(index);
         }
         return result;
     }, []);
 
-    const $fieldset = $(fieldsetSelector);
+    const $fieldset = $('fieldset');
     const $table = $fieldset.find('table');
 
     const hideTableColumns = (indexesToHide) => {

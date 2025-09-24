@@ -1,4 +1,4 @@
-// One checked checkbox per visible row is required
+// One checked checkbox per visible row is required. Validates on form submission.
 $(function () {
     const validationMessage = "Please answer this question before continuing.";
     

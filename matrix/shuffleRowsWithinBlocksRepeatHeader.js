@@ -1,5 +1,10 @@
-// Randomize rows within specified blocks in a table
+// Randomize rows within specified blocks in a table, keeping header rows in place after every N visible rows.
+// If the repeat header option is not used, set headerInsertAfter to an empty string or 0.
+
 $(function () {
+    const rangesToShuffle = [[1, 4], [6, 8], [9, 13]];
+    const headerInsertAfter = 7;
+
     function shuffleGroupedRows(ranges, repeatHeaderEvery) {
         var $tableBody = $('table tbody');
         var $rows = $tableBody.find('tr').not('.choice-row');
@@ -31,11 +36,11 @@ $(function () {
             }
             $tableBody.append(row);
 
-            if ((index + 1) % repeatHeaderEvery === 0) {
+            if (repeatHeaderEvery && Number(repeatHeaderEvery) > 0 && (index + 1) % repeatHeaderEvery === 0) {
                 $headerRows.clone().appendTo($tableBody);
             }
         });
     }
 
-    shuffleGroupedRows([[1, 4], [6, 8], [9, 13]], 7);
+    shuffleGroupedRows(rangesToShuffle, headerInsertAfter);
 });

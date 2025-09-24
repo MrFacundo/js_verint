@@ -1,4 +1,7 @@
+// Shuffle rows in a table, keeping header rows in place after every N visible rows.
 $(function () {
+    const headerInsertAfter = 7;
+
     function shuffleRows(headerInsertAfter) {
         var $tableBody = $('table tbody');
         var $rows = $tableBody.find('tr');
@@ -39,5 +42,5 @@ $(function () {
         }
     }
 
-    shuffleRows(7);
+    shuffleRows(headerInsertAfter);
 });

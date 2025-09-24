@@ -1,4 +1,4 @@
-// Validation: No more than n answers per column are allowed
+// Limits the number of answers that can be selected per column in a matrix question. Validates on form submission.
 $(function () {
     const maxInputs = 5;
     const validationMessage = `Veuillez sélectionner jusqu'à ${maxInputs} critères par produit / par colonne.`;

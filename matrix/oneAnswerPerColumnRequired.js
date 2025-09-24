@@ -1,4 +1,4 @@
-// Checks that at least one checkbox is checked in each visible column (table or mobile)
+// Checks that at least one checkbox is checked in each visible column (table or mobile). Validates on form submission.
 $(function () {
     const validationMessage = "Debe responder a todas las afirmaciones antes de enviar la encuesta.";
 

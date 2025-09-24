@@ -1,6 +1,4 @@
- /**
- * Hides matrix rows based on previous responses.
- */
+// Hides matrix rows based on previous responses.
  $(function () {
     const items = [
         "%[12]Q283_A_1LBL%",
@@ -17,15 +15,15 @@
         "%[12]Q283_A_12LBL%",
         "%[12]Q283_A_13LBL%"
     ];
-    
+    const valueToExclude = "Never";
+    const repeatHeaderEveryNRows = 7;
+
     const indexes = items.reduce((result, item, index) => {
-        if (item === "Never") {
+        if (item === valueToExclude) {
             result.push(index);
         }
         return result;
     }, []);
-    console.log("items", items);
-    console.log("indexes", indexes);
 
     const selector = 'fieldset';
 
@@ -83,6 +81,6 @@
         }
     }
 
-    hideContent(indexes, 7);
+    hideContent(indexes, repeatHeaderEveryNRows);
 });
 
