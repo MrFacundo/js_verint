@@ -1,2 +1,1 @@
-import { autoSelect } from "./list/autoSelect.js";
-export { autoSelect };
+export * from "./list/autoSelect.js";
