@@ -12,4 +12,3 @@ export function autoSelect() {
         $('#BN').click();
     }
 }
-}
