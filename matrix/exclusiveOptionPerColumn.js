@@ -1,7 +1,5 @@
 // Makes certain rows exclusive per column in a matrix question.
-$(function () {
-    const exclusiveRows = [13];
-
+export function exclusiveOptionPerColumn(exclusiveRows) {
     const $firstFieldset = $('fieldset').first();
     const isDesktopLayout = $firstFieldset.find('table').length > 0;
 
@@ -53,4 +51,4 @@ $(function () {
             uncheckExclusiveRows(columnIndex);
         }
     });
-});
+}
