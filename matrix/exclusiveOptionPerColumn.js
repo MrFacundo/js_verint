@@ -1,4 +1,7 @@
-// Makes certain rows exclusive per column in a matrix question.
+/**
+ * Ensures certain rows behave exclusively per column in a matrix question.
+ * @param {number[]} exclusiveRows - Array of 1-indexed row numbers that should behave exclusively per column.
+ */
 export function exclusiveOptionPerColumn(exclusiveRows) {
     const $firstFieldset = $('fieldset').first();
     const isDesktopLayout = $firstFieldset.find('table').length > 0;
