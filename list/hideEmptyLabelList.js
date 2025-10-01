@@ -1,4 +1,7 @@
-// Hides all li elements that contain empty label elements
+/**
+ * Hides all empty options in a list question
+ * 
+ */
 export function hideEmptyLabelList() {
 	const $list = $('.response-set');
 	$list.find('li.response').each(function () {
