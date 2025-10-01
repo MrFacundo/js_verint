@@ -1,6 +1,5 @@
 // Auto select if there is only one option. Does nothing if this page was reached using the back button.
 export function autoSelect() {
-    console.log('autoSelect script loaded');
     if (localStorage.getItem('buttonq3') === 'BB')
         return;
     const liElements = $('div.response-area li');
