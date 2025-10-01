@@ -1,5 +1,6 @@
 /**
  * Ensures certain rows behave exclusively per column in a matrix question.
+ * 
  * @param {number[]} exclusiveRows - Array of 1-indexed row numbers that should behave exclusively per column.
  */
 export function exclusiveOptionPerColumn(exclusiveRows) {

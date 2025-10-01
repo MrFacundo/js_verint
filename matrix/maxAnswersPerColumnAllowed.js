@@ -1,8 +1,10 @@
-// Limits the number of answers that can be selected per column in a matrix question. Validates on form submission.
-$(function () {
-    const maxInputs = 5;
-    const validationMessage = `Veuillez sélectionner jusqu'à ${maxInputs} critères par produit / par colonne.`;
-    
+/**
+ * Limits the number of answers that can be selected per column in a matrix question and validates on form submission.
+ *
+ * @param {number} maxInputs - Maximum number of answers allowed per column.
+ * @param {string} validationMessage - Message displayed when the maximum is exceeded.
+ */
+export function maxAnswersPerColumnAllowed(maxInputs, validationMessage) {
     const $firstFieldset = $('fieldset').first();
     const isDesktopLayout = $firstFieldset.find('table').length > 0;
 
@@ -47,4 +49,4 @@ $(function () {
     $('#BN').on('click', function (event) {
         checkMaxInputs(event, validationMessage, maxInputs);
     });
-});
+}

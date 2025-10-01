@@ -1,5 +1,5 @@
 // Hides all tr (for desktop layout) or li (for mobile layout)elements that contain empty label elements
-export function hideEmptyLabelEls() {
+export function hideEmptyLabelMatrix() {
   $('fieldset').each(function () {
     const $fieldset = $(this);
     const $table = $fieldset.find('table');

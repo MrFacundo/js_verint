@@ -1,3 +1,4 @@
 export { autoSelect } from "./list/autoSelect.js";
-export * from "./list/hideEmptyLabelList.js";
-export * from "./matrix/exclusiveOptionPerColumn.js";
+export { hideEmptyLabelList } from "./list/hideEmptyLabelList.js";
+export { exclusiveOptionPerColumn } from "./matrix/exclusiveOptionPerColumn.js";
+export { maxAnswersPerColumnAllowed } from "./matrix/maxAnswersPerColumnAllowed.js";
