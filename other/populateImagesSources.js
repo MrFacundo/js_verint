@@ -12,6 +12,4 @@ export function populateImagesSources(questionId) {
     for (let i = 0; i < imageSources.length; i++) {
         $('#' + questionId + '_' + (i + 1)).val(imageSources[i]);
     }
-
-    $('#BN').click();
 }
