@@ -1,10 +1,10 @@
 /**
- * Insert images with custom styles
+ * Insert image tags into specified elements with given styles
  * @param {Array} imageSources - Array of image source strings
  * @param {string} idPrefix - Prefix for the jQuery ID selector
  * @param {Object} styles - Object containing CSS style properties
  */
-export function addImages(imageSources, idPrefix, styles) {
+export function insertImages(imageSources, idPrefix, styles) {
     const styleString = Object.keys(styles)
         .map(function(key) {
             return key + ': ' + styles[key];
