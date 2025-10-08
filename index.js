@@ -8,4 +8,5 @@ export { insertImages } from "./other/insertImages.js";
 export { populateImagesSources } from "./other/populateImagesSources.js";
 export { shuffleRanges } from "./list/shuffleRanges.js";
 export { shuffleRangesMatrix } from "./matrix/shuffleRangesMatrix.js";
-export { skipQuestionMatrix } from "./matrix/skipQuestion.js";
+export { skipQuestionMatrix } from "./matrix/skipQuestionMatrix.js";
+export { pleaseSpecifyOptionRow } from "./matrix/pleaseSpecifyOptionRow.js";
