@@ -1,17 +1,20 @@
-// Allows a matrix question to be skipped, validates on submit if question is not skipped
-$(function () {
-	const skipSelector = "#Q306_1";
-	const skipTextSelector = "#Q306_QUESTION_TEXT";
-	const validationMessage = "Merci de répondre à la question pour poursuivre.";
+/**
+ * Allows a matrix question to be skipped, validates on submit if question is not skipped
+ * @param {string} skipSelector - The selector for the skip checkbox
+ * @param {string} validationMessage - The validation message to display
+ * @param {string} hiddenFieldId - The ID of the hidden field (optional)
+ */
+export function skipQuestionMatrix(skipSelector, validationMessage, hiddenFieldId) {
+	const questionPrefix = skipSelector.match(/#(Q\d+)/)[1];
+	const skipTextSelector = "#" + questionPrefix + "_QUESTION_TEXT";
 	const submitSelector = "#BN";
-	const hiddenFieldId = "pleaseSpecifyQ";
 
 	const $skip = $(skipSelector);
 	const $skipText = $(skipTextSelector);
 	const $firstFieldset = $('fieldset').first();
 	const $submit = $(submitSelector);
-	const $hiddenField = $('#' + hiddenFieldId);
-    const $hiddenInput = $hiddenField.find('input');
+	const $hiddenField = hiddenFieldId ? $('#' + hiddenFieldId) : null;
+    const $hiddenInput = $hiddenField ? $hiddenField.find('input') : null;
 
 	$skipText.hide();
 
@@ -44,7 +47,7 @@ $(function () {
 	$skip.on("change click", function () {
 		if ($(this).is(":checked")) {
 			clearRadios();
-			if (hiddenFieldId) {
+			if ($hiddenField && $hiddenInput) {
 				$hiddenField.hide();
 				$hiddenInput.val('');
 			}
@@ -63,9 +66,6 @@ $(function () {
 		if (!isValidInput()) {
 			e.preventDefault();
 			showValidation(validationMessage);
-			console.log("invalid");
-		} else {
-			console.log($skip.is(":checked") ? "Question skipped" : "valid");
 		}
 	});
-});
+}
