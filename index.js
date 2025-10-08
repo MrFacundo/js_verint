@@ -10,3 +10,4 @@ export { shuffleRanges } from "./list/shuffleRanges.js";
 export { shuffleRangesMatrix } from "./matrix/shuffleRangesMatrix.js";
 export { skipQuestionMatrix } from "./matrix/skipQuestionMatrix.js";
 export { pleaseSpecifyOptionRow } from "./matrix/pleaseSpecifyOptionRow.js";
+export { pleaseSpecifyOptionId } from "./matrix/pleaseSpecifyOptionId.js";

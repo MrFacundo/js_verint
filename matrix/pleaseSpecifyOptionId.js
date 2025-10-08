@@ -1,9 +1,10 @@
-// Show/hide a hidden field based on the checked state of a specific input
-$(function () {
-    const triggerInputId = "Q242_A_13_1";
-    const hiddenFieldId = "pleaseSpecifyQ";
-    const validationMessage = "Vous avez sélectionné 'Autres', merci de préciser.";
-
+/**
+ * Show/hide a hidden field based on the checked state of a specific input
+ * @param {string} triggerInputId - The ID of the input that triggers the hidden field
+ * @param {string} hiddenFieldId - The ID of the hidden field to show/hide
+ * @param {string} validationMessage - The validation message to display
+ */
+export function pleaseSpecifyOptionId(triggerInputId, hiddenFieldId, validationMessage) {
     const $triggerInput = $('#' + triggerInputId);
     const $hiddenField = $('#' + hiddenFieldId);
     const $hiddenInput = $hiddenField.find('input');
@@ -54,4 +55,4 @@ $(function () {
             showValidation(validationMessage);
         }
     });
-});
+}
