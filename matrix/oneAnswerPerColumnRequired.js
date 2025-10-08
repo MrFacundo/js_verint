@@ -1,7 +1,8 @@
-// Checks that at least one checkbox is checked in each visible column (table or mobile). Validates on form submission.
-$(function () {
-    const validationMessage = "Debe responder a todas las afirmaciones antes de enviar la encuesta.";
-
+/**
+ * Checks that at least one checkbox is checked in each visible column
+ * @param {string} validationMessage - The validation message to display
+ */
+export function oneAnswerPerColumnRequired(validationMessage) {
     const $firstFieldset = $('fieldset').first();
     const isDesktopLayout = $firstFieldset.find('table').length > 0;
 
@@ -57,4 +58,4 @@ $(function () {
     $('#BN').on('click', function (event) {
         checkInputs(event, validationMessage);
     });
-});
+}
