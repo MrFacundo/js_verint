@@ -5,3 +5,4 @@ export { maxAnswersPerColumnAllowed } from "./matrix/maxAnswersPerColumnAllowed.
 export { skipQuestionTextArea } from "./other/skipQuestionTextArea.js";
 export { insertImages } from "./other/insertImages.js";
 export { populateImagesSources } from "./other/populateImagesSources.js";
+export { shuffleRanges } from "./list/shuffleRanges.js";
